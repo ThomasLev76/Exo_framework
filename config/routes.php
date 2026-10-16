@@ -13,7 +13,8 @@
 use App\Response;
 use App\Request;
 
-use Controllers\ArticleController;
+use Controllers\ContactController;
+use Controllers\HomeController;
 
 
 
@@ -48,24 +49,24 @@ use Controllers\ArticleController;
 // ($_POST['name'] en PHP classique).
 // Le deuxième argument 'Anonyme' est la valeur par défaut
 // si le champ n'a pas été envoyé.
-// $router->post('/contact', function (App\Request $request) {
-//     $name = $request->input('name', 'Anonyme');
-//     return App\Response::html("<p>Merci $name, message reçu.</p>");
-// });
+//router->post('/contact', function (App\Request $request) {
+//   $name = $request->input('name', 'Anonyme');
+//   return App\Response::html("<p>Merci $name, message reçu.</p>");
+//});
 
 // le formulaire pour faire fonctionner la route POST /contact
-// $router->get('/contact', function (App\Request $request) {
-//     return App\Response::html('
-//         <form method="POST" action="/contact">
-//             <input type="text" name="name" placeholder="Votre nom">
-//             <button type="submit">Envoyer</button>
-//         </form>
-//     ');
-// });
+//$router->get('/contact', function (App\Request $request) {
+//   return App\Response::html('
+//       <form method="POST" action="/contact">
+//           <input type="text" name="name" placeholder="Votre nom">
+//           <button type="submit">Envoyer</button>
+//       </form>
+//  ');
+//});
 
 
 // A décommenter une fois le Router.php (avec paramètres) effectué
-// $router->get('/articles/{id}', function (Request $req, array $params) {
+// $router->get('/contact/{id}', function (Request $req, array $params) {
 //     $id = (int) $params['id'];
 //     return Response::html("<h1>Article n°$id</h1>");
 // });
@@ -78,8 +79,11 @@ use Controllers\ArticleController;
 // });
 
 
+$router->get('/', [HomeController::class, 'index']);
+
 // A décommenter pour utiliser les controllers. Commenter les routes correspondant au dessus.
-$router->get('/articles',      [ArticleController::class, 'index']);
-$router->get('/articles/{id}', [ArticleController::class, 'show']);
-$router->post('/articles',     [ArticleController::class, 'add']);
-// $router->get('/', [Controllers\HomeController::class, 'index']);
+$router->get('/contacts',               [ContactController::class, 'index']);
+$router->get('/contacts/create',        [ContactController::class, 'create']);
+$router->post('/contacts',              [ContactController::class, 'add']);
+$router->get('/contacts/{id}',          [ContactController::class, 'show']);
+$router->post('/contacts/{id}/delete',  [ContactController::class, 'delete']);
