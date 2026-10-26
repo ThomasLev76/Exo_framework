@@ -86,8 +86,8 @@ class Response
     // Redirection
     // Le body est vide (rien à afficher), le code 302 signifie
     // "redirection temporaire", et le header Location indique l'URL cible.
-    // Quand le navigateur reçoit un 302 avec Location: /articles,
-    // il fait automatiquement une nouvelle requête GET vers /articles.
+    // Quand le navigateur reçoit un 302 avec Location: /contact,
+    // il fait automatiquement une nouvelle requête GET vers /contact.
     // Code 301 = redirection permanente (le navigateur met en cache).
     // Code 302 = redirection temporaire (le navigateur re-demande à chaque fois).
     public static function redirect(string $url, int $code = 302): self

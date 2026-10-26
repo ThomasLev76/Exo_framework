@@ -25,8 +25,8 @@ class Router
     //     ],
     // ];
     //
-    // sans ce double niveau, si on a deux routes GET /articles
-    // et POST /articles elles s'écraseraient et on aurait qu'une route au lieu
+    // sans ce double niveau, si on a deux routes GET /contacts
+    // et POST /contacts elles s'écraseraient et on aurait qu'une route au lieu
     // de 2 différentes 
 
     /** @var array<string, array<string, callable>> */
@@ -62,7 +62,7 @@ class Router
     public function resolve(Request $request, ?Container $container = null): Response
     {
         // Récupérer les deux infos nécessaires au routage :
-        // la méthode HTTP (GET, POST...) et l'URI (/articles/42)
+        // la méthode HTTP (GET, POST...) et l'URI (/contacts/42)
         $method = $request->method();
         $uri    = $request->uri();
 
@@ -77,14 +77,14 @@ class Router
 
         // ── Parcourir toutes les routes de cette méthode ─────────
         // On boucle sur chaque route GET (ou POST, etc.) enregistrée.
-        // $pattern = le modèle d'URL déclaré ('/articles/{id}')
+        // $pattern = le modèle d'URL déclaré ('/contacts/{id}')
         // $handler = le code à exécuter (closure ou [Classe, méthode])
         foreach ($this->routes[$method] as $pattern => $handler) {
 
             // ── Transformer le pattern en expression régulière ───
             //
-            // Le problème : l'URI reçue est '/articles/42'
-            // mais le pattern déclaré est '/articles/{id}'.
+            // Le problème : l'URI reçue est '/contacts/42'
+            // mais le pattern déclaré est '/contacts/{id}'.
             // On ne peut pas comparer avec === parce que {id}
             // doit matcher n'importe quelle valeur.
             //
@@ -93,8 +93,8 @@ class Router
             // preg_replace cherche tous les {mot} dans le pattern
             // et les remplace par une capture nommée :
             //
-            //   Pattern avant :  /articles/{id}
-            //   Regex après   :  /articles/(?P<id>[^/]+)
+            //   Pattern avant :  /contacts/{id}
+            //   Regex après   :  /contacts/(?P<id>[^/]+)
             //
             //   Pattern avant :  /users/{userId}/posts/{postId}
             //   Regex après   :  /users/(?P<userId>[^/]+)/posts/(?P<postId>[^/]+)
@@ -112,10 +112,10 @@ class Router
             $regex = preg_replace('#\{(\w+)\}#', '(?P<$1>[^/]+)', $pattern);
 
             // Ajouter les ancres de début (^) et fin ($) :
-            //   /articles/(?P<id>[^/]+)  →  #^/articles/(?P<id>[^/]+)$#
+            //   /contacts/(?P<id>[^/]+)  →  #^/contacts/(?P<id>[^/]+)$#
             //
-            // Sans les ancres, /articles/42/edit matcherait /articles/{id}
-            // parce que la regex trouverait /articles/42 au début.
+            // Sans les ancres, /contacts/42/edit matcherait /contacts/{id}
+            // parce que la regex trouverait /contacts/42 au début.
             // Le $ force la fin de l'URI : il faut que tout corresponde.
             // Les # sont les délimiteurs de la regex PHP (au lieu de /).
             $regex = '#^' . $regex . '$#';
@@ -124,10 +124,10 @@ class Router
             // preg_match() compare l'URI réelle à la regex.
             // Si ça matche, $matches contient les captures :
             //
-            //   URI    : /articles/42
-            //   Regex  : #^/articles/(?P<id>[^/]+)$#
+            //   URI    : /contacts/42
+            //   Regex  : #^/contacts/(?P<id>[^/]+)$#
             //   Result : $matches = [
-            //       0    => '/articles/42',   (le match complet)
+            //       0    => '/contacts/42',   (le match complet)
             //       'id' => '42',             (capture nommée)
             //       1    => '42',             (capture par position)
             //   ]

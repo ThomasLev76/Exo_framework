@@ -34,18 +34,18 @@ class View
     //
     // $view = le chemin relatif de la vue, sans le .php
     //   'home/index'      → views/home/index.php
-    //   'articles/show'   → views/articles/show.php
+    //   'contacts/show'   → views/contacts/show.php
     //   'layouts/main'    → views/layouts/main.php
     //
     // $data = les variables à injecter dans le template
-    //   ['title' => 'Accueil', 'articles' => [...]]
+    //   ['title' => 'Accueil', 'contacts' => [...]]
     //
     // Retourne une string (pas une Response). C'est le contrôleur
     // qui décidera quoi en faire (Response::html(), etc.).
     public function render(string $view, array $data = []): string
     {
         // Construire le chemin complet du fichier template.
-        // 'articles/show' → '/chemin/views/articles/show.php'
+        // 'contacts/show' → '/chemin/views/contacts/show.php'
         $filePath = $this->viewsPath . '/' . $view . '.php';
 
         // Vérifier que le fichier existe avant d'essayer de l'inclure.

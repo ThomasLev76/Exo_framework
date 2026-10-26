@@ -22,7 +22,7 @@ class Container
     // $this->factories = [
     //     'view'     => function($container) { return new View('/chemin/views'); },
     //     'router'   => function($container) { return new Router(); },
-    //     'articles' => function($container) { return new ArticleRepository(); },
+    //     'contact' => function($container) { return new ContactRepository(); },
     // ];
     //
     // La recette n'est pas exécutée au moment du set() mais seulement
@@ -36,7 +36,7 @@ class Container
     // Une fois qu'un service a été créé, on le stocke ici
     // pour ne pas le recréer à chaque appel à get().
     // C'est le pattern Singleton appliqué par service :
-    // un seul objet View, un seul Router, un seul ArticleRepository
+    // un seul objet View, un seul Router, un seul ContactRepository
     // pour toute la durée de la requête.
     //
     // Exemple après deux appels à get('view') :
@@ -50,7 +50,7 @@ class Container
 
     // Enregistre une recette de création pour un service.
     //
-    // $name    = le nom du service ('view', 'router', 'articles'...)
+    // $name    = le nom du service ('view', 'router', 'contact'...)
     // $factory = une fonction qui crée et retourne le service.
     //            Elle reçoit le conteneur lui-même en paramètre,
     //            ce qui permet à un service de dépendre d'un autre.
@@ -61,8 +61,8 @@ class Container
     //   });
     //
     //   // Un service qui dépend d'un autre service :
-    //   $container->set('articleController', function($c) {
-    //       return new ArticleController($c->get('view'));
+    //   $container->set('contactController', function($c) {
+    //       return new ContactController($c->get('view'));
     //       //                           ^^^^^^^^^^^^^^
     //       //  Le conteneur se passe lui-même à la factory,
     //       //  qui peut demander d'autres services via get().

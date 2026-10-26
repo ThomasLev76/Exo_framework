@@ -1,0 +1,16 @@
+{
+    "contacts": [
+        {
+            "id": 1,
+            "nom": "Keenan",
+            "email": "keenan.blet@ecoles-epsi.net",
+            "telephone": "0603668193"
+        },
+        {
+            "id": 2,
+            "nom": "Nathan",
+            "email": "nathan.bodin@ecoles-epsi.net",
+            "telephone": "0749398159"
+        }
+    ]
+}
